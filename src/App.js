@@ -1,8 +1,7 @@
 import './App.css';
 import Counter from './Counter';
-function App() {
 
- 
+function App() {
 
   return (
     <div className="App">

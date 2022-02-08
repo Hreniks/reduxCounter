@@ -1,26 +1,23 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { decrement, increment,reset } from './actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrement, increment, reset } from './actions';
 
-class Counter extends React.Component {
-    render() {
-        return (
-            <>
-                Counter: {this.props.state}
-                <div className='button'>
-                    <button onClick={() => this.props.decrement()}>-</button>
-                    <button onClick={() => this.props.reset()}>Reset</button>
-                    <button onClick={() => this.props.increment()}>+</button>
-                </div>
-            </>);
-    }
+function Counter() {
+    let count = useSelector(state => {
+        return state.counter;
+    });
+
+    const dispatch = useDispatch();
+
+    return (
+        <>
+            Counter: {count}
+            <div className='button'>
+                <button onClick={() => dispatch(decrement())}>-</button>
+                <button onClick={() => dispatch(reset())}>Reset</button>
+                <button onClick={() => dispatch(increment())}>+</button>
+            </div>
+        </>);;
 }
 
-function mapStateToProps(state) {
-    return { state: state };
-}
-
-function mapDispatchToProps() {
-    return { increment, decrement, reset }
-}
-export default connect(mapStateToProps, mapDispatchToProps())(Counter);
+export default Counter;
